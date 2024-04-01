@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2024-04-01T17:27:43.150Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0" etag="z8qoEAgnDWzwzIM-P23c" version="24.2.1" type="github">
+<mxfile host="app.diagrams.net" modified="2024-04-01T17:29:29.522Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36 Edg/123.0.0.0" etag="NaHaPB0YdH7LE8v8cbsi" version="24.2.1" type="github">
   <diagram name="Página-1" id="3CISv_pW3vBZ53ylFXfm">
     <mxGraphModel dx="832" dy="519" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -24,6 +24,9 @@
         </mxCell>
         <mxCell id="3oXP0uqj8dlofh8PmDxL-8" value="ESRB" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="630" y="350" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="3oXP0uqj8dlofh8PmDxL-10" value="Sponsor_Ads" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="420" width="120" height="80" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
