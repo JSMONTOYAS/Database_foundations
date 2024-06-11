@@ -1,128 +1,149 @@
--- Tabla User
-CREATE TABLE "User" (
-    PKID SERIAL PRIMARY KEY,
-    Name VARCHAR(255) NOT NULL,
-    Country VARCHAR(255),
-    Email VARCHAR(255) UNIQUE NOT NULL,
-    Password VARCHAR(255) NOT NULL
-);
-
--- Tabla Device
 CREATE TABLE Device (
-    PKID SERIAL PRIMARY KEY,
-    Name VARCHAR(255) NOT NULL,
-    Model VARCHAR(255) NOT NULL,
-    OS VARCHAR(255) NOT NULL
+    ID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Brand VARCHAR(100),
+    Model VARCHAR(100),
+    Ram VARCHAR(50),
+    GPU VARCHAR(50),
+    Resolution VARCHAR(50),
+    OS_version VARCHAR(50)
 );
 
--- Tabla Device_User
-CREATE TABLE Device_User (
-    PK_FK1_Id_Device INT,
-    FK2_Id_User INT,
-    PRIMARY KEY (PK_FK1_Id_Device, FK2_Id_User),
-    FOREIGN KEY (PK_FK1_Id_Device) REFERENCES Device(PKID),
-    FOREIGN KEY (FK2_Id_User) REFERENCES "User"(PKID)
-);
-
--- Tabla Category
-CREATE TABLE Category (
-    PKID SERIAL PRIMARY KEY,
-    Name VARCHAR(255) NOT NULL
-);
-
--- Tabla App
 CREATE TABLE App (
-    PKID SERIAL PRIMARY KEY,
-    Name VARCHAR(255) NOT NULL,
-    FK_ID_Category INT,
-    Downloads INT DEFAULT 0,
-    FOREIGN KEY (FK_ID_Category) REFERENCES Category(PKID)
+    ID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Description TEXT,
+    Price DECIMAL(10, 2),
+    App_Category INT,
+    User_ID INT,
+    release_date DATE,
+    Version VARCHAR(50),
+    Downloads INT,
+    Evnts VARCHAR(100),
+    Reviews TEXT,
+    rating DECIMAL(3, 2),
+    Sponsor_ads INT,
+    Region_ID INT,
+    Device_ID INT,
+    Size VARCHAR(50),
+    FOREIGN KEY (App_Category) REFERENCES Category(ID),
+    FOREIGN KEY (User_ID) REFERENCES User(ID),
+    FOREIGN KEY (Sponsor_ads) REFERENCES Sponsor_Ads(ID),
+    FOREIGN KEY (Region_ID) REFERENCES Region(ID),
+    FOREIGN KEY (Device_ID) REFERENCES Device(ID)
 );
 
--- Tabla User_App
-CREATE TABLE User_App (
-    PK_FK1_Id_User INT,
-    FK_Device INT,
-    PRIMARY KEY (PK_FK1_Id_User, FK_Device),
-    FOREIGN KEY (PK_FK1_Id_User) REFERENCES "User"(PKID),
-    FOREIGN KEY (FK_Device) REFERENCES App(PKID)
+CREATE TABLE User (
+    ID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Email VARCHAR(100),
+    Password VARCHAR(100),
+    Birth_date DATE,
+    User_type INT,
+    RegisterDate DATE,
+    App_library INT,
+    Reviews INT,
+    Devices INT,
+    Payment_method INT,
+    Region_ID INT,
+    FOREIGN KEY (User_type) REFERENCES Type_User(ID),
+    FOREIGN KEY (App_library) REFERENCES App_library(ID),
+    FOREIGN KEY (Reviews) REFERENCES Review(ID),
+    FOREIGN KEY (Devices) REFERENCES Device(ID),
+    FOREIGN KEY (Payment_method) REFERENCES Payment_Method(ID),
+    FOREIGN KEY (Region_ID) REFERENCES Region(ID)
 );
 
--- Tabla Payment
-CREATE TABLE Payment (
-    PKID SERIAL PRIMARY KEY,
-    Type VARCHAR(255) NOT NULL
-);
-
--- Tabla User_Payment
-CREATE TABLE User_Payment (
-    PK_FK1_Id_User INT,
-    FK2_Id_Payment INT,
-    PRIMARY KEY (PK_FK1_Id_User, FK2_Id_Payment),
-    FOREIGN KEY (PK_FK1_Id_User) REFERENCES "User"(PKID),
-    FOREIGN KEY (FK2_Id_Payment) REFERENCES Payment(PKID)
-);
-
--- Tabla Earn
-CREATE TABLE Earn (
-    PKID SERIAL PRIMARY KEY,
-    Sale DECIMAL(10, 2) NOT NULL,
-    FK_ID_App INT,
-    FOREIGN KEY (FK_ID_App) REFERENCES App(PKID)
-);
-
--- Tabla Download
-CREATE TABLE Download (
-    PKID SERIAL PRIMARY KEY,
-    Date TIMESTAMP NOT NULL,
-    FK_ID_User INT,
-    FK_ID_App INT,
-    FOREIGN KEY (FK_ID_User) REFERENCES "User"(PKID),
-    FOREIGN KEY (FK_ID_App) REFERENCES App(PKID)
-);
-
--- Tabla Review
 CREATE TABLE Review (
-    PKID SERIAL PRIMARY KEY,
-    Rating INT NOT NULL,
-    Comment TEXT,
-    FK_ID_User INT,
-    FK_ID_App INT,
-    FOREIGN KEY (FK_ID_User) REFERENCES "User"(PKID),
-    FOREIGN KEY (FK_ID_App) REFERENCES App(PKID)
+    ID INT PRIMARY KEY,
+    User_ID INT,
+    App_ID INT,
+    Text TEXT,
+    Rate INT,
+    Review_date DATE,
+    FOREIGN KEY (User_ID) REFERENCES User(ID),
+    FOREIGN KEY (App_ID) REFERENCES App(ID)
 );
 
--- Tabla Dev
-CREATE TABLE Dev (
-    PKID SERIAL PRIMARY KEY,
-    Name VARCHAR(255) NOT NULL,
-    Company VARCHAR(255)
+CREATE TABLE Payment_Method (
+    ID INT PRIMARY KEY,
+    Card_number VARCHAR(20),
+    CVV INT,
+    expiration_date DATE
 );
 
--- Tabla App_Dev
-CREATE TABLE App_Dev (
-    PK_FK1_Id_App INT,
-    FK2_Id_Dev INT,
-    PRIMARY KEY (PK_FK1_Id_App, FK2_Id_Dev),
-    FOREIGN KEY (PK_FK1_Id_App) REFERENCES App(PKID),
-    FOREIGN KEY (FK2_Id_Dev) REFERENCES Dev(PKID)
+CREATE TABLE Type_User (
+    ID INT PRIMARY KEY,
+    Name VARCHAR(50),
+    Description TEXT
 );
 
--- Tabla Subscription
-CREATE TABLE Subscription (
-    PKID SERIAL PRIMARY KEY,
-    Type VARCHAR(255) NOT NULL,
-    StartDate DATE NOT NULL,
-    EndDate DATE,
-    FK_ID_User INT,
-    FOREIGN KEY (FK_ID_User) REFERENCES "User"(PKID)
+CREATE TABLE App_library (
+    ID INT PRIMARY KEY,
+    User_id INT,
+    Description TEXT,
+    FOREIGN KEY (User_id) REFERENCES User(ID)
 );
 
--- Tabla Invoice
-CREATE TABLE Invoice (
-    PKID SERIAL PRIMARY KEY,
-    Date DATE NOT NULL,
-    Amount DECIMAL(10, 2) NOT NULL,
-    FK_ID_Subscription INT,
-    FOREIGN KEY (FK_ID_Subscription) REFERENCES Subscription(PKID)
+CREATE TABLE User_App_library (
+    id_user INT,
+    id_app_library INT,
+    PRIMARY KEY (id_user, id_app_library),
+    FOREIGN KEY (id_user) REFERENCES User(ID),
+    FOREIGN KEY (id_app_library) REFERENCES App_library(ID)
+);
+
+CREATE TABLE Device_App (
+    id_app INT,
+    id_Device INT,
+    PRIMARY KEY (id_app, id_Device),
+    FOREIGN KEY (id_app) REFERENCES App(ID),
+    FOREIGN KEY (id_Device) REFERENCES Device(ID)
+);
+
+CREATE TABLE Device_User (
+    id_user INT,
+    id_Device INT,
+    PRIMARY KEY (id_user, id_Device),
+    FOREIGN KEY (id_user) REFERENCES User(ID),
+    FOREIGN KEY (id_Device) REFERENCES Device(ID)
+);
+
+CREATE TABLE Sponsor_Ads (
+    ID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Extra VARCHAR(100),
+    Video VARCHAR(100),
+    Category_ID INT,
+    Region_ID INT,
+    FOREIGN KEY (Category_ID) REFERENCES Category(ID),
+    FOREIGN KEY (Region_ID) REFERENCES Region(ID)
+);
+
+CREATE TABLE Sponsor_ads_app (
+    id_app INT,
+    id_Sponsor_ads INT,
+    PRIMARY KEY (id_app, id_Sponsor_ads),
+    FOREIGN KEY (id_app) REFERENCES App(ID),
+    FOREIGN KEY (id_Sponsor_ads) REFERENCES Sponsor_Ads(ID)
+);
+
+CREATE TABLE User_App (
+    id_user INT,
+    id_app INT,
+    PRIMARY KEY (id_user, id_app),
+    FOREIGN KEY (id_user) REFERENCES User(ID),
+    FOREIGN KEY (id_app) REFERENCES App(ID)
+);
+
+CREATE TABLE Category (
+    ID INT PRIMARY KEY,
+    Name VARCHAR(50),
+    Description TEXT
+);
+
+CREATE TABLE Region (
+    ID INT PRIMARY KEY,
+    Name VARCHAR(50),
+    Description TEXT
 );
