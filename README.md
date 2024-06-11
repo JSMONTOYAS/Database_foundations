@@ -1,4 +1,4 @@
-Project Description
+<h1>Project Description</h1>
 For the project proposal, we aim to develop an application that serves as a
 distributor and hub for purchasing and downloading purely digital apps and products,
 all within an interface where each user has access to the catalog of applications
@@ -11,7 +11,7 @@ for every copy sold of the product, or alternatively, a percentage of the total 
 generated if the application is free to download. If the user prefers, this percentage
 will vary based on the net value of the revenue produced by the application in its last
 year of publication available in the sales and distribution app.
-Project Requirements - User Stories
+<h1>Project Requirements - User Stories</h1>
 1. As a user, I want to search and discover new digital applications and products for
 download, so that I can explore a wide range of options available.
 2. As a user, I want to filter search results by categories, prices, and ratings to easily
