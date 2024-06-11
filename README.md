@@ -14,6 +14,7 @@ year of publication available in the sales and distribution app.
 <h1>Project Requirements - User Stories</h1>
 1. As a user, I want to search and discover new digital applications and products for
 download, so that I can explore a wide range of options available.
+<hr>
 2. As a user, I want to filter search results by categories, prices, and ratings to easily
 find what I need, so that I can quickly narrow down my options.
 3. As a user, I want the option to view reviews and ratings from others before
